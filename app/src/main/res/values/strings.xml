@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SkipVox</string>
+    <string name="accessibility_service_label">SkipVox Voice Ad-Skipper</string>
+    <string name="accessibility_service_description">Hands-free voice-activated ad-skipping for your favorite streaming apps. Listens for the \'skip\' command and performs a click on \'Skip Ad\' buttons automatically when you speak.</string>
+</resources>
