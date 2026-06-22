@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkipVox - Skip Ads. Hands Free.</title>
+    
+    <!-- OG Meta Tags -->
+    <meta property="og:title" content="SkipVox - Skip Ads. Hands Free.">
+    <meta property="og:description" content="The first voice-activated ad skipper for YouTube, Hulu, and more.">
+    <meta property="og:image" content="assets/logo.png">
+    <meta property="og:url" content="https://skipvox.com">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        indigo: {
+                            DEFAULT: '#5D5FEF',
+                        },
+                        cyan: {
+                            DEFAULT: '#00D2C4',
+                        },
+                        coral: {
+                            DEFAULT: '#FF4B5C',
+                        },
+                        obsidian: {
+                            DEFAULT: '#121214',
+                            surface: '#1E1E22',
+                        },
+                        slate: {
+                            light: '#F1F5F9',
+                            muted: '#94A3B8',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Poppins', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #121214;
+            color: #F1F5F9;
+        }
+        .glow-indigo {
+            box-shadow: 0 0 20px rgba(93, 95, 239, 0.3);
+        }
+        .glow-white {
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+        .text-gradient {
+            background: linear-gradient(to right, #5D5FEF, #00D2C4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="font-sans overflow-x-hidden selection:bg-indigo/30">
+
+    <!-- Header -->
+    <header class="max-w-7xl mx-auto px-6 py-8 flex justify-between items-center">
+        <div class="flex items-center gap-3">
+            <img src="assets/logo.png" alt="SkipVox Logo" class="w-10 h-10 rounded-xl">
+            <span class="font-display font-bold text-2xl tracking-tight">SkipVox</span>
+        </div>
+        <nav class="hidden md:flex gap-8 text-slate-muted font-medium">
+            <a href="#features" class="hover:text-slate-light transition">Why SkipVox?</a>
+            <a href="#how-it-works" class="hover:text-slate-light transition">How it Works</a>
+            <a href="#waitlist" class="hover:text-slate-light transition">Join Waitlist</a>
+        </nav>
+        <a href="#waitlist" class="bg-indigo text-white px-6 py-2.5 rounded-full font-bold hover:bg-opacity-90 transition glow-indigo">Early Access</a>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="max-w-7xl mx-auto px-6 pt-16 pb-24 flex flex-col md:flex-row items-center gap-16">
+        <div class="flex-1 text-center md:text-left">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo/10 border border-indigo/20 text-indigo text-xs font-bold mb-8 uppercase tracking-wider">
+                <span class="w-2 h-2 rounded-full bg-indigo animate-pulse"></span>
+                Now in Private Beta
+            </div>
+            <h1 class="font-display font-bold text-5xl md:text-7xl leading-tight mb-6">
+                Skip ads. <br>
+                <span class="text-gradient">Hands free.</span>
+            </h1>
+            <p class="text-slate-muted text-lg md:text-xl max-w-xl mb-10 mx-auto md:mx-0">
+                The first voice-activated ad skipper for YouTube, Hulu, and more. Just say "SkipVox, skip!" and get back to your content instantly.
+            </p>
+            
+            <!-- Waitlist Form -->
+            <form id="waitlist-form-hero" class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto md:mx-0">
+                <input type="email" placeholder="Enter your email" required class="flex-1 bg-obsidian-surface border border-slate-muted/20 rounded-2xl px-6 py-4 outline-none focus:border-indigo transition text-slate-light">
+                <button type="submit" class="bg-indigo text-white px-8 py-4 rounded-2xl font-bold hover:bg-opacity-90 transition glow-indigo whitespace-nowrap">
+                    Get Early Access
+                </button>
+            </form>
+            <div id="success-hero" class="hidden mt-4 text-cyan font-bold">✨ You're on the list! We'll be in touch soon.</div>
+            <p class="mt-4 text-slate-muted text-sm italic">Join thousands reclaim their time. 5 free skips every day.</p>
+        </div>
+        
+        <div class="flex-1 relative">
+            <div class="absolute -top-20 -left-20 w-64 h-64 bg-indigo opacity-10 rounded-full blur-3xl"></div>
+            <div class="absolute -bottom-20 -right-20 w-64 h-64 bg-cyan opacity-10 rounded-full blur-3xl"></div>
+            <div class="relative z-10 w-full max-w-lg mx-auto bg-obsidian-surface rounded-[2.5rem] p-2 border border-white/5 shadow-2xl overflow-hidden">
+                <img src="assets/twitter-ad.png" alt="SkipVox Tech" class="w-full rounded-[2rem]">
+            </div>
+        </div>
+    </section>
+
+    <!-- Platform Badges -->
+    <section class="max-w-7xl mx-auto px-6 pb-24 text-center">
+        <p class="text-slate-muted uppercase tracking-[0.2em] text-xs font-bold mb-10">Available on all your devices</p>
+        <div class="flex flex-wrap justify-center gap-8 md:gap-20 opacity-40 grayscale hover:grayscale-0 hover:opacity-100 transition duration-500">
+            <div class="flex items-center gap-3">
+                <span class="text-3xl">🤖</span>
+                <span class="font-display font-bold text-xl">Android</span>
+            </div>
+            <div class="flex items-center gap-3">
+                <span class="text-3xl">🍏</span>
+                <span class="font-display font-bold text-xl">iOS</span>
+            </div>
+            <div class="flex items-center gap-3">
+                <span class="text-3xl">🌐</span>
+                <span class="font-display font-bold text-xl">Chrome</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Persona Features -->
+    <section id="features" class="bg-obsidian-surface py-24">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-20">
+                <h2 class="font-display font-bold text-4xl mb-4">Built for your busiest moments.</h2>
+                <p class="text-slate-muted text-lg max-w-2xl mx-auto">SkipVox runs quietly in the background and listens for your command. No touching, no clicking, no interruptions.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-12">
+                <!-- Persona 1 -->
+                <div class="flex flex-col">
+                    <div class="rounded-3xl overflow-hidden mb-8 border border-white/5">
+                        <img src="assets/instagram-ad.png" alt="The Home Chef" class="w-full aspect-square object-cover">
+                    </div>
+                    <h3 class="font-display font-bold text-2xl mb-4 text-indigo">The Home Chef</h3>
+                    <p class="text-slate-muted leading-relaxed">Mid-recipe with hands covered in dough? Don't dirty your screen. Just say "SkipVox, skip!" and keep cooking while your tutorial resumes instantly.</p>
+                </div>
+                
+                <!-- Persona 2 -->
+                <div class="flex flex-col">
+                    <div class="rounded-3xl overflow-hidden mb-8 border border-white/5">
+                        <img src="assets/tiktok-ad.png" alt="The Gym Goer" class="w-full aspect-square object-cover">
+                    </div>
+                    <h3 class="font-display font-bold text-2xl mb-4 text-cyan">The Gym Goer</h3>
+                    <p class="text-slate-muted leading-relaxed">Don't drop the weights! When a 30-second ad ruins your workout banger, let your voice do the tapping. Stay in the zone and finish your set.</p>
+                </div>
+                
+                <!-- Persona 3 -->
+                <div class="flex flex-col">
+                    <div class="rounded-3xl overflow-hidden mb-8 border border-white/5">
+                        <img src="assets/facebook-ad.png" alt="The Couch Potato" class="w-full aspect-square object-cover">
+                    </div>
+                    <h3 class="font-display font-bold text-2xl mb-4 text-coral">The Cozy Couch Potato</h3>
+                    <p class="text-slate-muted leading-relaxed">Tucked warmly in a blanket with the remote across the room? Stay cozy. SkipVox handles the ads so you don't have to lift a single finger.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it works -->
+    <section id="how-it-works" class="py-24">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center gap-16">
+                <div class="flex-1">
+                    <h2 class="font-display font-bold text-4xl mb-8">Works where you watch.</h2>
+                    <div class="space-y-12">
+                        <div class="flex gap-6">
+                            <div class="w-12 h-12 rounded-2xl bg-indigo/10 text-indigo flex items-center justify-center font-bold shrink-0 border border-indigo/20">1</div>
+                            <div>
+                                <h4 class="font-bold text-xl mb-2">Enable SkipVox</h4>
+                                <p class="text-slate-muted">Open the app and toggle on the service. Our battery-optimized engine runs silently in the background.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-6">
+                            <div class="w-12 h-12 rounded-2xl bg-cyan/10 text-cyan flex items-center justify-center font-bold shrink-0 border border-cyan/20">2</div>
+                            <div>
+                                <h4 class="font-bold text-xl mb-2">Watch Normally</h4>
+                                <p class="text-slate-muted">Use YouTube, Hulu, or any major streaming app. SkipVox works across all your favorite platforms.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-6">
+                            <div class="w-12 h-12 rounded-2xl bg-coral/10 text-coral flex items-center justify-center font-bold shrink-0 border border-coral/20">3</div>
+                            <div>
+                                <h4 class="font-bold text-xl mb-2">Speak to Skip</h4>
+                                <p class="text-slate-muted">Say "SkipVox, skip!" — our on-device AI detects the button and clicks it in milliseconds. Privacy guaranteed.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-1">
+                     <div class="bg-obsidian-surface rounded-[3rem] p-4 border border-white/5 shadow-2xl">
+                        <img src="assets/mockup.png" alt="SkipVox App" class="w-full rounded-[2.5rem]">
+                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Waitlist Section -->
+    <section id="waitlist" class="max-w-7xl mx-auto px-6 py-24">
+        <div class="bg-gradient-to-br from-indigo to-coral rounded-[3rem] p-12 md:p-24 text-center relative overflow-hidden shadow-2xl">
+            <div class="absolute inset-0 bg-black/20"></div>
+            <div class="absolute -top-24 -right-24 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>
+            <div class="relative z-10">
+                <h2 class="font-display font-bold text-4xl md:text-6xl mb-8">Ready to reclaim your time?</h2>
+                <p class="text-white/90 text-xl mb-12 max-w-2xl mx-auto leading-relaxed">
+                    Join the waitlist today and get 3 months of SkipVox Premium for free when we launch. Hands-free skipping is just a word away.
+                </p>
+                <form id="waitlist-form-footer" class="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
+                    <input type="email" placeholder="Enter your email" required class="flex-1 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-6 py-4 outline-none focus:bg-white/20 transition placeholder:text-white/60 text-white">
+                    <button type="submit" class="bg-white text-indigo px-8 py-4 rounded-2xl font-bold hover:bg-slate-light transition glow-white">
+                        Join the Waitlist
+                    </button>
+                </form>
+                <div id="success-footer" class="hidden mt-4 text-white font-bold text-xl">✅ You're on the list! We'll see you soon.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-muted/10 py-16">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-12">
+            <div class="flex flex-col items-center md:items-start gap-4">
+                <div class="flex items-center gap-3">
+                    <img src="assets/logo.png" alt="SkipVox Logo" class="w-10 h-10 rounded-xl">
+                    <span class="font-display font-bold text-2xl">SkipVox</span>
+                </div>
+                <p class="text-slate-muted text-sm max-w-xs text-center md:text-left">The first voice-activated ad skipper. <br>Built by SkipVox &bull; skipvox-2eb46101@ctomail.io</p>
+            </div>
+            <div class="flex flex-col items-center md:items-end gap-6">
+                <div class="flex gap-8 text-slate-muted font-medium">
+                    <a href="#" class="hover:text-slate-light transition">Twitter</a>
+                    <a href="#" class="hover:text-slate-light transition">Discord</a>
+                    <a href="#" class="hover:text-slate-light transition">Privacy Policy</a>
+                </div>
+                <p class="text-slate-muted text-sm">&copy; 2026 SkipVox. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const handleSignup = (formId, successId) => {
+            const form = document.getElementById(formId);
+            const success = document.getElementById(successId);
+            
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const email = form.querySelector('input').value;
+                
+                // Store locally
+                let waitlist = JSON.parse(localStorage.getItem('skipvox_waitlist') || '[]');
+                waitlist.push({ email, timestamp: new Date().toISOString() });
+                localStorage.setItem('skipvox_waitlist', JSON.stringify(waitlist));
+                
+                // UI feedback
+                form.classList.add('hidden');
+                success.classList.remove('hidden');
+                
+                console.log('Signup successful:', email);
+            });
+        };
+
+        handleSignup('waitlist-form-hero', 'success-hero');
+        handleSignup('waitlist-form-footer', 'success-footer');
+    </script>
+</body>
+</html>
