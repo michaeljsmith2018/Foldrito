@@ -1,29 +1,46 @@
 const express = require('express');
 const path = require('path');
+const fs = require('fs').promises;
 const app = express();
 const port = 3000;
+
+const WAITLIST_FILE = path.join(__dirname, 'waitlist.json');
 
 // Use express.json() to parse JSON bodies
 app.use(express.json());
 
 // Serve static files from both landing and web directories
-// Prioritize landing/ for the frontend assets and index.html
 app.use(express.static(path.join(__dirname, '../landing')));
 app.use(express.static(path.join(__dirname)));
 
 // API Route for waitlist
 app.post('/api/waitlist', async (req, res) => {
     const { email } = req.body;
+    const signup = { 
+        email, 
+        timestamp: new Date().toISOString() 
+    };
+    
     console.log(`New waitlist signup: ${email}`);
 
     try {
-        // We will integrate Resend here once credentials arrive
-        // For now, we'll log it and return success
-        
+        // 1. Store in local JSON file
+        let waitlist = [];
+        try {
+            const data = await fs.readFile(WAITLIST_FILE, 'utf8');
+            waitlist = JSON.parse(data);
+        } catch (err) {
+            // File doesn't exist yet
+        }
+        waitlist.push(signup);
+        await fs.writeFile(WAITLIST_FILE, JSON.stringify(waitlist, null, 2));
+
+        // 2. Notification (Scaffolded)
+        // Note: To send actual emails, we need an API key or SMTP config.
+        // We've scaffolded Resend integration below.
         /* 
         const { Resend } = require('resend');
         const resend = new Resend(process.env.RESEND_API_KEY);
-        
         await resend.emails.send({
             from: 'SkipVox Waitlist <onboarding@resend.dev>',
             to: 'skipvox-2eb46101@ctomail.io',
@@ -31,7 +48,8 @@ app.post('/api/waitlist', async (req, res) => {
             html: `<p>New user signed up for the waitlist: <strong>${email}</strong></p>`
         });
         */
-
+        
+        console.log(`Signup recorded for ${email}`);
         res.status(200).json({ message: 'Signup successful' });
     } catch (error) {
         console.error('Error processing waitlist signup:', error);
