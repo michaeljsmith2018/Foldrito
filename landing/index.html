@@ -76,10 +76,11 @@
         </div>
         <nav class="hidden md:flex gap-8 text-slate-muted font-medium">
             <a href="#features" class="hover:text-slate-light transition">Why SkipVox?</a>
+            <a href="#pricing" class="hover:text-slate-light transition">Pricing</a>
             <a href="#how-it-works" class="hover:text-slate-light transition">How it Works</a>
             <a href="#waitlist" class="hover:text-slate-light transition">Join Waitlist</a>
         </nav>
-        <a href="#waitlist" class="bg-indigo text-white px-6 py-2.5 rounded-full font-bold hover:bg-opacity-90 transition glow-indigo">Early Access</a>
+        <a href="#pricing" class="bg-indigo text-white px-6 py-2.5 rounded-full font-bold hover:bg-opacity-90 transition glow-indigo">Get Premium</a>
     </header>
 
     <!-- Hero Section -->
@@ -98,12 +99,11 @@
             </p>
             
             <!-- Waitlist Form -->
-            <form id="waitlist-form-hero" class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto md:mx-0">
-                <input type="email" placeholder="Enter your email" required class="flex-1 bg-obsidian-surface border border-slate-muted/20 rounded-2xl px-6 py-4 outline-none focus:border-indigo transition text-slate-light">
-                <button type="submit" class="bg-indigo text-white px-8 py-4 rounded-2xl font-bold hover:bg-opacity-90 transition glow-indigo whitespace-nowrap">
+            <div class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto md:mx-0">
+                <a href="#pricing" class="bg-indigo text-white px-8 py-4 rounded-2xl font-bold hover:bg-opacity-90 transition glow-indigo whitespace-nowrap text-center">
                     Get Early Access
-                </button>
-            </form>
+                </a>
+            </div>
             <div id="success-hero" class="hidden mt-4 text-cyan font-bold">✨ You're on the list! We'll be in touch soon.</div>
             <p class="mt-4 text-slate-muted text-sm italic">Join thousands reclaim their time. 5 free skips every day.</p>
         </div>
@@ -172,6 +172,73 @@
                     <p class="text-slate-muted leading-relaxed">Tucked warmly in a blanket with the remote across the room? Stay cozy. SkipVox handles the ads so you don't have to lift a single finger.</p>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-24 bg-obsidian">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="font-display font-bold text-4xl mb-4 text-gradient">Choose Your Plan</h2>
+                <p class="text-slate-muted text-lg">Reclaim your time with SkipVox Premium. No ads, ever.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- Monthly -->
+                <div class="bg-obsidian-surface p-10 rounded-[2.5rem] border border-white/5 hover:border-indigo/30 transition flex flex-col">
+                    <div class="mb-8">
+                        <span class="text-slate-muted font-bold uppercase tracking-widest text-sm">Monthly</span>
+                        <div class="flex items-baseline gap-1 mt-2">
+                            <span class="text-4xl font-bold font-display">$2.99</span>
+                            <span class="text-slate-muted">/month</span>
+                        </div>
+                    </div>
+                    <ul class="space-y-4 mb-10 flex-1">
+                        <li class="flex items-center gap-3">
+                            <span class="text-indigo">✓</span>
+                            <span>Unlimited skips</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="text-indigo">✓</span>
+                            <span>All platforms (Mobile + Desktop)</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="text-indigo">✓</span>
+                            <span>On-device AI voice recognition</span>
+                        </li>
+                    </ul>
+                    <a href="https://buy.stripe.com/14AfZjapVaFM6fZcEWfQI09" target="_blank" class="block text-center bg-indigo text-white py-4 rounded-2xl font-bold hover:bg-opacity-90 transition glow-indigo">Get Monthly</a>
+                </div>
+
+                <!-- Yearly -->
+                <div class="bg-obsidian-surface p-10 rounded-[2.5rem] border-2 border-indigo relative flex flex-col">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-indigo text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-tighter">Best Value - Save 44%</div>
+                    <div class="mb-8">
+                        <span class="text-indigo font-bold uppercase tracking-widest text-sm">Yearly</span>
+                        <div class="flex items-baseline gap-1 mt-2">
+                            <span class="text-4xl font-bold font-display">$19.99</span>
+                            <span class="text-slate-muted">/year</span>
+                        </div>
+                    </div>
+                    <ul class="space-y-4 mb-10 flex-1">
+                        <li class="flex items-center gap-3">
+                            <span class="text-indigo">✓</span>
+                            <span>Everything in Monthly</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="text-indigo">✓</span>
+                            <span>Priority support</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="text-indigo">✓</span>
+                            <span>Early access to new features</span>
+                        </li>
+                    </ul>
+                    <a href="https://buy.stripe.com/5kQ7sN9lR7tAdIrbASfQI0a" target="_blank" class="block text-center bg-indigo text-white py-4 rounded-2xl font-bold hover:bg-opacity-90 transition glow-indigo">Get Yearly</a>
+                </div>
+            </div>
+            
+            <p class="text-center mt-12 text-slate-muted text-sm italic">Payments secured by Stripe. No credit card required for free tier (5 skips/day).</p>
         </div>
     </section>
 
@@ -261,20 +328,39 @@
             const form = document.getElementById(formId);
             const success = document.getElementById(successId);
             
-            form.addEventListener('submit', (e) => {
+            form.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 const email = form.querySelector('input').value;
                 
-                // Store locally
-                let waitlist = JSON.parse(localStorage.getItem('skipvox_waitlist') || '[]');
-                waitlist.push({ email, timestamp: new Date().toISOString() });
-                localStorage.setItem('skipvox_waitlist', JSON.stringify(waitlist));
-                
-                // UI feedback
+                // UI feedback (immediate)
                 form.classList.add('hidden');
                 success.classList.remove('hidden');
-                
-                console.log('Signup successful:', email);
+
+                try {
+                    // Send to backend
+                    const response = await fetch('/api/waitlist', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ email }),
+                    });
+                    
+                    if (!response.ok) throw new Error('Signup failed');
+                    
+                    // Store locally as backup
+                    let waitlist = JSON.parse(localStorage.getItem('skipvox_waitlist') || '[]');
+                    waitlist.push({ email, timestamp: new Date().toISOString(), synced: true });
+                    localStorage.setItem('skipvox_waitlist', JSON.stringify(waitlist));
+                    
+                    console.log('Signup successful and synced:', email);
+                } catch (err) {
+                    console.error('Signup sync failed:', err);
+                    // Fallback to local only
+                    let waitlist = JSON.parse(localStorage.getItem('skipvox_waitlist') || '[]');
+                    waitlist.push({ email, timestamp: new Date().toISOString(), synced: false });
+                    localStorage.setItem('skipvox_waitlist', JSON.stringify(waitlist));
+                }
             });
         };
 
