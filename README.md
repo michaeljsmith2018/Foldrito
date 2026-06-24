@@ -23,9 +23,12 @@ Welcome to the Android MVP for **SkipVox**! This repository contains a fully-fea
    - Integrated check cards for **Accessibility Service Permissions** and **Microphone Audio Permissions**, with deep links directly into System Settings to request access.
    - Real-time terminal-like live status screen showing speech recognition events and action logs (e.g., `"Listening for 'Skip' command..."`, `"Heard 'Skip' - Clicked Button!"`).
 
-4. **Freemium & Subscription Simulation**:
+4. **Freemium with Google Play Billing**:
    - Standard users start on a Free Tier limited to **5 daily skips** (persisted in secure `SharedPreferences` across app restarts and resets).
-   - "Upgrade to Premium" button which opens a beautiful details dialog. Users can instantly mock the upgrade to Premium to unlock **unlimited skips**, testing both monetized pathways effortlessly.
+   - **Google Play Billing Library v6.2.0** integrates real subscription purchasing.
+   - Two subscription tiers: **Monthly ($2.99/mo)** and **Yearly ($19.99/yr)**.
+   - Purchases are verified, acknowledged, and automatically restored on app relaunch.
+   - Subscription management opens Google Play's native subscription settings.
 
 ---
 
@@ -37,7 +40,7 @@ Welcome to the Android MVP for **SkipVox**! This repository contains a fully-fea
   ├── settings.gradle.kts                       # Root project multi-module definitions
   ├── gradle.properties                         # Global JVM and compiler properties
   ├── gradle/
-  │   └── libs.versions.toml                     # Centralized Gradle Version Catalog
+  │   └── libs.versions.toml                     # Centralized Gradle Version Catalog (includes billing)
   └── app/
       ├── build.gradle.kts                      # Module-specific configuration (Compose, Target SDK 34, Min SDK 26)
       ├── proguard-rules.pro                    # Obfuscation rules
@@ -49,10 +52,11 @@ Welcome to the Android MVP for **SkipVox**! This repository contains a fully-fea
           │   └── values/
           │       └── strings.xml               # App, service label, and security descriptions
           └── kotlin/com/skipvox/app/
-              ├── MainActivity.kt               # Main Jetpack Compose UI & permission checkers
+              ├── MainActivity.kt               # Main Jetpack Compose UI & billing integration
               ├── SkipVoxState.kt               # Centralized state machine & SharedPreferences manager
               ├── VoiceSkipController.kt        # SpeechRecognizer engine (continuous listener)
-              └── SkipAdAccessibilityService.kt # Accessibility core (hierarchy scanning & automated clicking)
+              ├── SkipAdAccessibilityService.kt # Accessibility core (hierarchy scanning & automated clicking)
+              └── BillingManager.kt             # Google Play Billing integration (subscriptions)
 ```
 
 ### Flow of Execution:
@@ -65,7 +69,7 @@ Welcome to the Android MVP for **SkipVox**! This repository contains a fully-fea
 7. The service grabs `rootInActiveWindow` and recursively scans the screen for standard skip text or YouTube-specific selectors.
 8. If found:
    - If the user is on the Free Tier, the app checks if they have remaining skips today, consumes one, and clicks the button.
-   - If the user is Premium, the app clicks the button instantly without limit.
+   - If the user is Premium (verified via Google Play Billing), the app clicks the button instantly without limit.
    - The UI status updates in real-time.
 
 ---
@@ -77,6 +81,7 @@ Welcome to the Android MVP for **SkipVox**! This repository contains a fully-fea
 - **UI Framework**: Jetpack Compose (Material 3 theme)
 - **Programming Language**: Kotlin 1.9.23
 - **Dependency Management**: Gradle Version Catalog (`libs.versions.toml`) with Kotlin DSL (`.gradle.kts`)
+- **Billing**: Google Play Billing Library 6.2.0 with subscriptions support
 
 ---
 
@@ -85,6 +90,25 @@ Welcome to the Android MVP for **SkipVox**! This repository contains a fully-fea
 ### Prerequisites
 - Android Studio (Iguana, Jellyfish, or newer recommended)
 - Java SDK 17+ installed on your computer
+- Google Play Console account with products configured (see below)
+
+### Google Play Console Setup (Required for Billing)
+Before the subscription dialog works with real purchases, you must configure products in Google Play Console:
+
+1. Create a Google Play Console account and set up your app.
+2. Under **Monetize > Products > Subscriptions**, create:
+   - **Product ID**: `skipvox_premium_monthly` — $2.99/month
+   - **Product ID**: `skipvox_premium_yearly` — $19.99/year
+3. Publish the app to an Internal / Closed test track.
+4. Add your test accounts (license testers) to the test track.
+5. Build a signed APK/AAB and upload to the Play Console.
+6. The billing flow will then work with real payment processing.
+
+### Testing Without Google Play
+For development/emulator testing (without real billing), the billing library will gracefully degrade:
+- The billing connection will fail on an emulator without Google Play.
+- The dialog shows "Connecting to Google Play..." and buttons remain disabled.
+- The Accessibility Service, Voice Recognition, and Free Tier continue to work fully.
 
 ### Installation & Run Steps
 1. Copy or transfer the `/home/team/shared/android/` directory to your local development machine.
@@ -99,4 +123,20 @@ Welcome to the Android MVP for **SkipVox**! This repository contains a fully-fea
 3. Open the YouTube app and find an ad-supported video.
 4. When the "Skip Ad" button appears, say **"Skip ad"** clearly.
 5. Watch the button get clicked hands-free! You can switch back to SkipVox at any time to inspect the console logs on the main dashboard status screen.
-6. Trigger 5 skips on the free plan to test the subscription block, then click **Upgrade to Premium** to test unlimited simulated ad-skips!
+6. Trigger 5 skips on the free plan to test the daily limit, then tap **Upgrade to Premium** to purchase via Google Play Billing.
+
+---
+
+## 🔄 Subscription SKUs
+
+| SKU ID | Type | Price | Billing Period |
+|--------|------|-------|---------------|
+| `skipvox_premium_monthly` | Subscription | $2.99 | Monthly |
+| `skipvox_premium_yearly` | Subscription | $19.99 | Yearly |
+
+Purchases are acknowledged automatically upon completion and restored each time the app launches or resumes.
+
+---
+
+## 📝 License
+Proprietary — SkipVox Inc.

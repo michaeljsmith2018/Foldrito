@@ -60,6 +60,7 @@ dependencies {
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
+    implementation(libs.billing)
     
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
