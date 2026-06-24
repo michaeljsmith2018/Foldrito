@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
 import android.text.TextUtils
@@ -37,6 +38,12 @@ import androidx.compose.ui.window.Dialog
 import androidx.core.content.ContextCompat
 
 class MainActivity : ComponentActivity() {
+
+    companion object {
+        // Stripe payment links for web purchase fallback
+        const val STRIPE_URL_MONTHLY = "https://buy.stripe.com/14AfZjapVaFM6fZcEWfQI09"
+        const val STRIPE_URL_YEARLY = "https://buy.stripe.com/5kQ7sN9lR7tAdIrbASfQI0a"
+    }
 
     private lateinit var prefs: SharedPreferences
     private lateinit var billingManager: BillingManager
@@ -502,7 +509,7 @@ class MainActivity : ComponentActivity() {
             }
         }
 
-        // Premium subscription dialog (Google Play Billing integration)
+        // Premium subscription dialog (Google Play Billing integration + Stripe fallback)
         if (showPremiumDialog) {
             PremiumSubscriptionDialog(
                 monthlyPrice = billingManager.getFormattedPrice(BillingManager.SKU_MONTHLY),
@@ -530,6 +537,16 @@ class MainActivity : ComponentActivity() {
                         Toast.LENGTH_SHORT
                     ).show()
                 },
+                onStripeMonthly = {
+                    showPremiumDialog = false
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(STRIPE_URL_MONTHLY))
+                    startActivity(intent)
+                },
+                onStripeYearly = {
+                    showPremiumDialog = false
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(STRIPE_URL_YEARLY))
+                    startActivity(intent)
+                },
                 onDismiss = { showPremiumDialog = false }
             )
         }
@@ -543,6 +560,8 @@ class MainActivity : ComponentActivity() {
         onSelectMonthly: () -> Unit,
         onSelectYearly: () -> Unit,
         onRestorePurchases: () -> Unit,
+        onStripeMonthly: () -> Unit,
+        onStripeYearly: () -> Unit,
         onDismiss: () -> Unit
     ) {
         Dialog(onDismissRequest = onDismiss) {
@@ -636,6 +655,42 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.fillMaxWidth()
                     ) {
                         Text("Restore Purchases", color = Color.White)
+                    }
+
+                    // Divider before web purchase fallback
+                    HorizontalDivider(
+                        modifier = Modifier.padding(vertical = 4.dp),
+                        color = Color(0xFF444444)
+                    )
+
+                    Text(
+                        "Or purchase via web:",
+                        fontSize = 11.sp,
+                        color = Color.Gray,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.fillMaxWidth()
+                    )
+
+                    TextButton(
+                        onClick = onStripeMonthly,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text(
+                            "Monthly — $monthlyPrice/mo (Web)",
+                            fontSize = 12.sp,
+                            color = Color(0xFF88BBFF)
+                        )
+                    }
+
+                    TextButton(
+                        onClick = onStripeYearly,
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Text(
+                            "Yearly — $yearlyPrice/yr (Web, Best Value)",
+                            fontSize = 12.sp,
+                            color = Color(0xFF88BBFF)
+                        )
                     }
 
                     TextButton(onClick = onDismiss) {
