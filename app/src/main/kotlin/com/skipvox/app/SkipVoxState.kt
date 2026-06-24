@@ -67,9 +67,16 @@ object SkipVoxState {
         _skipStatus.value = status
     }
 
+    /**
+     * Update premium status. Called by BillingManager when purchases change,
+     * or by the UI for dev/testing purposes.
+     * @param premium Whether the user has an active subscription
+     */
     fun setPremium(premium: Boolean) {
         _isPremium.value = premium
-        prefs.edit().putBoolean(KEY_IS_PREMIUM, premium).apply()
+        if (::prefs.isInitialized) {
+            prefs.edit().putBoolean(KEY_IS_PREMIUM, premium).apply()
+        }
         updateRemainingSkips()
         Log.d(TAG, "Premium status updated to: $premium")
     }
@@ -105,12 +112,15 @@ object SkipVoxState {
         if (_isPremium.value) {
             _freeSkipsRemaining.value = -1 // Indicates unlimited
         } else {
-            val currentCount = prefs.getInt(KEY_FREE_SKIPS_COUNT, 0)
-            _freeSkipsRemaining.value = (MAX_FREE_SKIPS - currentCount).coerceAtLeast(0)
+            if (::prefs.isInitialized) {
+                val currentCount = prefs.getInt(KEY_FREE_SKIPS_COUNT, 0)
+                _freeSkipsRemaining.value = (MAX_FREE_SKIPS - currentCount).coerceAtLeast(0)
+            }
         }
     }
 
     private fun resetSkipsIfNewDay() {
+        if (!::prefs.isInitialized) return
         val lastSkipDate = prefs.getString(KEY_LAST_SKIP_DATE, "")
         val today = getCurrentDateString()
         if (lastSkipDate != today) {
